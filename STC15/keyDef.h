@@ -14,7 +14,7 @@ typedef enum {
 } Key;
 
 Key scanKey() {
-	P3 |= 0xF8; P1 = 0xFF; P2 = 0x1F;
+	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
 	_nop_(); _nop_(); _nop_(); _nop_();
 	P33 = 0; P34 = 1; P35 = 1; P36 = 1; P37 = 1;
 	delay(1);
@@ -32,7 +32,7 @@ Key scanKey() {
 	if (P23 == 0) return KeyPlus;
 	if (P24 == 0) return KeyBack;
 	
-	P3 |= 0xF8; P1 = 0xFF; P2 = 0x1F;
+	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
 	_nop_(); _nop_(); _nop_(); _nop_();
 	P33 = 1; P34 = 0; P35 = 1; P36 = 1; P37 = 1;
 	delay(1);
@@ -50,7 +50,7 @@ Key scanKey() {
 	if (P23 == 0) return KeyMRB;
 	if (P24 == 0) return KeyTab;
 	
-	P3 |= 0xF8; P1 = 0xFF; P2 = 0x1F;
+	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
 	_nop_(); _nop_(); _nop_(); _nop_();
 	P33 = 1; P34 = 1; P35 = 0; P36 = 1; P37 = 1;
 	delay(1);
@@ -68,7 +68,7 @@ Key scanKey() {
 	if (P23 == 0) return KeyApo;
 	if (P24 == 0) return KeyEnter;
 	
-	P3 |= 0xF8; P1 = 0xFF; P2 = 0x1F;
+	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
 	_nop_(); _nop_(); _nop_(); _nop_();
 	P33 = 1; P34 = 1; P35 = 1; P36 = 0; P37 = 1;
 	delay(1);
@@ -86,7 +86,7 @@ Key scanKey() {
 	if (P23 == 0) return KeySh;
 	if (P24 == 0) return KeyASla;
 	
-	P3 |= 0xF8; P1 = 0xFF; P2 = 0x1F;
+	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
 	_nop_(); _nop_(); _nop_(); _nop_();
 	P33 = 1; P34 = 1; P35 = 1; P36 = 1; P37 = 0;
 	delay(1);
@@ -103,8 +103,8 @@ Key scanKey() {
 	return 0xFF;
 }
 
-char* scanKeys() {
-	return 0;
+void scanKeys(char* keys) {
+
 }
 
 #endif

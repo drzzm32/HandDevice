@@ -5,14 +5,20 @@
 #define __UTIL_H_
 
 #define uint8_t unsigned char
+	
+#define CLPOS P25
+#define CLNEG P26
+static bit CapsLock = 0;
 
 static bit BUSY = 0;
 static uint8_t DATA;
 
 void portInit() {
-	P1M0 = 0; P1M1 = 0;
-	P2M0 = 0; P2M1 = 0;
-	P3M0 = 0; P3M1 = 0;
+	P1M0 = 0;		P1M1 = 0;
+	P2M0 = 0x20;	P2M1 = 0;
+	P3M0 = 0;		P3M1 = 0;
+	
+	CLNEG = 0;		CLPOS = 0;
 }
 
 void serialInit() {
