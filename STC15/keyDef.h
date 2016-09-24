@@ -5,10 +5,10 @@
 
 typedef enum {
 /*	P10			P11			P12			P13			P14			P15			P16			P17			P20				P21				P22				P23				P24					 */
-	Key1 = '1',	Key2 = '2',	Key3 = '3',	Key4 = '4',	Key5 = '5',	Key6 = '6',	Key7 = '7',	Key8 = '8',	Key9 = '9',		Key0 = '0',		KeyMinus = '-',	KeyPlus = '+',	KeyBack = 8,	/*P33*/
-	KeyQ = 'Q',	KeyW = 'W',	KeyE = 'E',	KeyR = 'R',	KeyT = 'T',	KeyY = 'Y',	KeyU = 'U',	KeyI = 'I',	KeyO = 'O',		KeyP = 'P',		KeyMLB = '[',	KeyMRB = ']',	KeyTab = 9,		/*P34*/
-	KeyCL = 20,	KeyA = 'A',	KeyS = 'S',	KeyD = 'D',	KeyF = 'F',	KeyG = 'G',	KeyH = 'H',	KeyJ = 'J',	KeyK = 'K',		KeyL = 'L',		KeySC = ';',	KeyApo = '\'',	KeyEnter = 10,	/*P35*/
-	KeySh = 16,	KeyZ = 'Z',	KeyX = 'X',	KeyC = 'C',	KeyV = 'V',	KeyB = 'B',	KeyN = 'N',	KeyM = 'M',	KeyCom = ',',	KeyPer = '.',	KeySla = '/', /*KeySh,*/		KeyASla = '\\',	/*P36*/
+	Key1 = '1',	Key2 = '2',	Key3 = '3',	Key4 = '4',	Key5 = '5',	Key6 = '6',	Key7 = '7',	Key8 = '8',	Key9 = '9',		Key0 = '0',		KeyMinus = '-',	KeyEqu = '=',	KeyBack = 8,	/*P33*/
+	KeyQ = 'Q',	KeyW = 'W',	KeyE = 'E',	KeyR = 'R',	KeyT = 'T',	KeyY = 'Y',	KeyU = 'U',	KeyI = 'I',	KeyO = 'O',		KeyP = 'P',		KeyLB = '(',	KeyRB = ')',	KeyTab = 9,		/*P34*/
+	KeyCL = 20,	KeyA = 'A',	KeyS = 'S',	KeyD = 'D',	KeyF = 'F',	KeyG = 'G',	KeyH = 'H',	KeyJ = 'J',	KeyK = 'K',		KeyL = 'L',		KeyMul = '*',	KeyPlus = '+',	KeyEnter = 10,	/*P35*/
+	KeyUl ='_',	KeyZ = 'Z',	KeyX = 'X',	KeyC = 'C',	KeyV = 'V',	KeyB = 'B',	KeyN = 'N',	KeyM = 'M',	KeyCom = ',',	KeyPer = '.',	KeySla = '/',	KeyQuot = '\"',	KeyASla = '\\',	/*P36*/
 	KeyCt = 17,	KeyAl = 18,				KeyEsc = 27,		  /*KeySp,*/	KeySp = 32,/*KeySp,*/				  /*KeyEsc,*/		  				/*KeyAl,		KeyCt*/			/*P37*/
 	
 } Key;
@@ -29,7 +29,7 @@ Key scanKey() {
 	if (P20 == 0) return Key9;
 	if (P21 == 0) return Key0;
 	if (P22 == 0) return KeyMinus;
-	if (P23 == 0) return KeyPlus;
+	if (P23 == 0) return KeyEqu;
 	if (P24 == 0) return KeyBack;
 	
 	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
@@ -46,8 +46,8 @@ Key scanKey() {
 	if (P17 == 0) return KeyI;
 	if (P20 == 0) return KeyO;
 	if (P21 == 0) return KeyP;
-	if (P22 == 0) return KeyMLB;
-	if (P23 == 0) return KeyMRB;
+	if (P22 == 0) return KeyLB;
+	if (P23 == 0) return KeyRB;
 	if (P24 == 0) return KeyTab;
 	
 	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
@@ -64,15 +64,15 @@ Key scanKey() {
 	if (P17 == 0) return KeyJ;
 	if (P20 == 0) return KeyK;
 	if (P21 == 0) return KeyL;
-	if (P22 == 0) return KeySC;
-	if (P23 == 0) return KeyApo;
+	if (P22 == 0) return KeyMul;
+	if (P23 == 0) return KeyPlus;
 	if (P24 == 0) return KeyEnter;
 	
 	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
 	_nop_(); _nop_(); _nop_(); _nop_();
 	P33 = 1; P34 = 1; P35 = 1; P36 = 0; P37 = 1;
 	delay(1);
-	if (P10 == 0) return KeySh;
+	if (P10 == 0) return KeyUl;
 	if (P11 == 0) return KeyZ;
 	if (P12 == 0) return KeyX;
 	if (P13 == 0) return KeyC;
@@ -83,7 +83,7 @@ Key scanKey() {
 	if (P20 == 0) return KeyCom;
 	if (P21 == 0) return KeyPer;
 	if (P22 == 0) return KeySla;
-	if (P23 == 0) return KeySh;
+	if (P23 == 0) return KeyQuot;
 	if (P24 == 0) return KeyASla;
 	
 	P3 |= 0xF8; P1 = 0xFF; P2 |= 0x1F;
