@@ -26,18 +26,30 @@ int jmpFlag = 0;
 
 
 void readln(char* str) {
-    uint8_t i = 0;
+    char i = 0;
     while (true) {
         if (Serial.available() > 0) {
-            if (Serial.peek() == '\n') break;
+            if (Serial.peek() == '\n') break;           
             str[i] = Serial.read();
-            tft.print(str[i]);
-            i += 1;
+            if (str[i] == 0x08 && i > 0) {
+                i -= 1;
+                tft.print((char)0x08);
+                continue;
+            } else if (str[i] != 0x08) {
+                tft.print(str[i]);
+                i += 1;
+            }
         } else if (Serial1.available() > 0) {
             if (Serial1.peek() == '\n') break;
             str[i] = Serial1.read();
-            tft.print(str[i]);
-            i += 1;
+            if (str[i] == 0x08 && i > 0) {
+                i -= 1;
+                tft.print((char)0x08);
+                continue;
+            } else if (str[i] != 0x08) {
+                tft.print(str[i]);
+                i += 1;
+            }
         }
     }
     str[i] = '\0';
