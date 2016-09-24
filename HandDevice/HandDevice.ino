@@ -33,10 +33,16 @@ void readln(char* str) {
             str[i] = Serial.read();
             tft.print(str[i]);
             i += 1;
+        } else if (Serial1.available() > 0) {
+            if (Serial1.peek() == '\n') break;
+            str[i] = Serial1.read();
+            tft.print(str[i]);
+            i += 1;
         }
     }
     str[i] = '\0';
-    Serial.read();
+    if (Serial.available() > 0) Serial.read();
+    else if (Serial1.available() > 0) Serial1.read();
     tft.println();
 }
 
@@ -184,7 +190,7 @@ void cliBuild() {
     tft.print("Scripter ");
     tft.println(THIS_VERSION);
     tft.println("================================");
-    tft.println("Usage: Serial Port 0\n\n");
+    tft.println("Usage: Serial or NSDN-Keypad\n\n");
     while (1) {
         tft.print(lines);
         tft.print(" >>> ");
@@ -239,6 +245,7 @@ void setup() {
     tft.fillScreen(0x0000);
 
     Serial.begin(9600);
+    Serial1.begin(9600);
 }
 
 void loop() {
