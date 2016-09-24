@@ -12,7 +12,7 @@ Adafruit_TFTLCD tft(A3, A2, A1, A0, A4);
 #define TYPE_EXPLAIN 1
 
 #define CLS_SCREEN "clear"
-#define THIS_VERSION "ver0.04 (Embedded Repo)"
+#define THIS_VERSION "ver0.05 (Embedded Repo)"
 
 double numBuf;
 char* strBuf;
@@ -31,12 +31,13 @@ void readln(char* str) {
         if (Serial.available() > 0) {
             if (Serial.peek() == '\n') break;
             str[i] = Serial.read();
+            tft.print(str[i]);
             i += 1;
         }
     }
     str[i] = '\0';
     Serial.read();
-    tft.println(str);
+    tft.println();
 }
 
 void clear() {
