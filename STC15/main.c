@@ -1,12 +1,14 @@
 #include "util.h"
 #include "KeyDef.h"
 
-uint8_t key, prev;
+uint8_t key, prev, i;
 bit brust = 0;
 
 void main() {
 	portInit();
 	serialInit();
+	
+	write("NSDN-Keypad v1.0\n");
 	
 	while (1) {
 		key = (char)scanKey();
@@ -21,26 +23,25 @@ void main() {
 		
 		} else if (key == KeyEsc) {
 		
-		} else if (0) {
+		} else if (key != 0xFF) {
 			if (key == prev && !brust) {
-				delay(20);
+				for (i = 0; i < 10; i++) {
+					delay(2);
+					key = (char)scanKey();
+					if (key != prev) goto END;
+				}
 				brust = 1;
-				key = (char)scanKey();
-			} else if (key != prev) {
-				brust = 0;
+				END:
+				_nop_();
 			}
-			if (key >= 'A' && key <= 'Z' && !CapsLock) key += 32;
-			send(key);
 			prev = key;
+			if (key >= 'A' && key <= 'Z' && !CapsLock) key += 32;
+			if (key != 0xFF) send(key);
 			key = 0xFF;
 			delay(2);
-		} else if (key != 0xFF) {
-			if (key >= 'A' && key <= 'Z' && !CapsLock) key += 32;
-			send(key);
-			key = 0xFF;
-			delay(10);
 		} else {
 			brust = 0;
+			prev = 0;
 		}
 	}
 }

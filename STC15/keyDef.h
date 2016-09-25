@@ -103,8 +103,4 @@ Key scanKey() {
 	return 0xFF;
 }
 
-void scanKeys(char* keys) {
-
-}
-
 #endif
