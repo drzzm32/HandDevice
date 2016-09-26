@@ -9,6 +9,9 @@
 #define CLPOS P25
 #define CLNEG P26
 static bit CapsLock = 0;
+static bit Ctrl = 0;
+static bit Alt = 0;
+static bit Caps = 0;
 
 static bit BUSY = 0;
 static uint8_t DATA;

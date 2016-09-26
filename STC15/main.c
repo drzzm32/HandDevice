@@ -15,14 +15,25 @@ void main() {
 		if (key == KeyCL) {
 			while (key == KeyCL)
 				key = (char)scanKey();
-			CapsLock = ~CapsLock;
-			CLPOS = CapsLock;
+			if (Ctrl) {
+				CapsLock = ~CapsLock;
+				CLPOS = CapsLock;
+				Ctrl = 0;
+			} else Caps = 1;
 		} else if (key == KeyCt) {
-		
+			while (key == KeyCt)
+				key = (char)scanKey();
+			Ctrl = 1;
+			//send(KeyCt);
 		} else if (key == KeyAl) {
-		
+			while (key == KeyAl)
+				key = (char)scanKey();
+			Alt = 1;
+			//send(KeyAl);
 		} else if (key == KeyEsc) {
-		
+			while (key == KeyEsc)
+				key = (char)scanKey();
+			//send(KeyEsc);
 		} else if (key != 0xFF) {
 			if (key == prev && !brust) {
 				for (i = 0; i < 10; i++) {
@@ -35,10 +46,11 @@ void main() {
 				_nop_();
 			}
 			prev = key;
-			if (key >= 'A' && key <= 'Z' && !CapsLock) key += 32;
+			if (key >= 'A' && key <= 'Z' && !CapsLock && !Caps) key += 32;
 			if (key != 0xFF) send(key);
 			key = 0xFF;
 			delay(2);
+			Ctrl = 0; Alt = 0; Caps = 0;
 		} else {
 			brust = 0;
 			prev = 0;
